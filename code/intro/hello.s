@@ -1,23 +1,26 @@
 	.file	"hello.c"
-	.section	.rodata.str1.1,"aMS",@progbits,1
+	.section	.rodata
 .LC0:
 	.string	"hello, world"
 	.text
 	.globl	main
 	.type	main, @function
 main:
-.LFB22:
+.LFB0:
 	.cfi_startproc
-	subq	$8, %rsp
+	pushq	%rbp
 	.cfi_def_cfa_offset 16
-	movl	$.LC0, %edi
-	call	puts
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	leaq	.LC0(%rip), %rdi
+	call	puts@PLT
 	movl	$0, %eax
-	addq	$8, %rsp
-	.cfi_def_cfa_offset 8
+	popq	%rbp
+	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE22:
+.LFE0:
 	.size	main, .-main
-	.ident	"GCC: (Ubuntu 4.8.1-2ubuntu1~12.04) 4.8.1"
+	.ident	"GCC: (Ubuntu 6.4.0-17ubuntu1) 6.4.0 20180424"
 	.section	.note.GNU-stack,"",@progbits
